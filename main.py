@@ -137,7 +137,9 @@ def zad12():
         print("Pole avgRating zostało dodane/zaaktualizowane do filmu 'Pan Tadeusz' z 1999 roku.")
 
 
-
+def zad13():
+    zad13Result = titleCollection.delete_many({'startYear': {'$lt': 1989}})
+    ic(zad13Result.deleted_count)
 
 # zad1()
 # zad2()
@@ -150,4 +152,5 @@ def zad12():
 # zad9()
 # zad10()
 # zad11()
-zad12()
+# zad12()
+# ##zad13()
