@@ -74,12 +74,22 @@ def zad6():
     indexCount = len(indexes)
     ic(indexCount)
 
+
+def zad8(title, year):
+    movie = titleCollection.find_one({'primaryTitle': title, 'startYear': year})
+    if movie:
+        rating = ratingCollection.find_one({'tconst': movie['tconst']})
+        if rating:
+            averageRating = rating['averageRating']
+            zad8Result = {'primaryTitle': title, 'startYear': year, 'averageRating': averageRating}
+            ic(zad8Result)
+
 # zad1()
 # zad2()
 # zad3()
 # zad4a()
 # zad4b()  # DZIALA, ALE WYKONUJE SIĘ PONAD 3 H
 # zad5() # COS POPSUTE
-zad6()
-
+# zad6()
+zad8("Casablanca", 1942)
 
