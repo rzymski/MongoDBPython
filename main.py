@@ -84,6 +84,22 @@ def zad8(title, year):
             zad8Result = {'primaryTitle': title, 'startYear': year, 'averageRating': averageRating}
             ic(zad8Result)
 
+
+def zad9():
+    movie = titleCollection.find_one({'primaryTitle': 'Blade Runner', 'startYear': 1982})
+    if movie:
+        rating = ratingCollection.find_one({'tconst': movie['tconst']})
+        if rating:
+            average_rating = rating['averageRating']
+            num_votes = rating['numVotes']
+            titleCollection.update_one({'_id': movie['_id']}, {'$set': {'rating': [{'averageRating': average_rating, 'numVotes': num_votes}]}})
+            print("Pole rating zostało pomyślnie dodane do dokumentu.")
+            movieAfterUpdate = titleCollection.find_one({'primaryTitle': 'Blade Runner', 'startYear': 1982})
+            ic(movieAfterUpdate)
+        else:
+            print("Ocena dla filmu 'Blade Runner' z roku 1982 nie została znaleziona.")
+    else:
+        print("Film 'Blade Runner' z roku 1982 nie został znaleziony.")
 # zad1()
 # zad2()
 # zad3()
@@ -91,5 +107,5 @@ def zad8(title, year):
 # zad4b()  # DZIALA, ALE WYKONUJE SIĘ PONAD 3 H
 # zad5() # COS POPSUTE
 # zad6()
-zad8("Casablanca", 1942)
-
+# zad8("Blade Runner", 1982)
+zad9()
