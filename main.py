@@ -100,6 +100,45 @@ def zad9():
             print("Ocena dla filmu 'Blade Runner' z roku 1982 nie została znaleziona.")
     else:
         print("Film 'Blade Runner' z roku 1982 nie został znaleziony.")
+
+
+def zad10():
+    movie = titleCollection.find_one({'primaryTitle': 'Blade Runner', 'startYear': 1982})
+    if movie:
+        titleCollection.update_one({'_id': movie['_id']}, {'$push': {'rating': {'averageRating': 10, 'numVotes': 55555}}})
+        print("Nowy dokument został pomyślnie dodany do pola rating.")
+        movieAfterUpdate = titleCollection.find_one({'primaryTitle': 'Blade Runner', 'startYear': 1982})
+        ic(movieAfterUpdate)
+    else:
+        ic("Film 'Blade Runner' z roku 1982 nie został znaleziony.")
+
+
+def zad11():
+    movie = titleCollection.find_one({'primaryTitle': 'Blade Runner', 'startYear': 1982})
+    if movie:
+        titleCollection.update_one({'_id': movie['_id']}, {'$unset': {'rating': ''}})
+        print("Pole rating zostało pomyślnie usunięte z dokumentu.")
+        movieAfterUpdate = titleCollection.find_one({'primaryTitle': 'Blade Runner', 'startYear': 1982})
+        ic(movieAfterUpdate)
+    else:
+        print("Film 'Blade Runner' z roku 1982 nie został znaleziony.")
+
+
+def zad12():
+    # titleCollection.delete_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999})
+    movie = titleCollection.find_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999})
+    if not movie:
+        titleCollection.update_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999}, {'$set': {'avgRating': 9.1}}, upsert=True)
+        print("Film 'Pan Tadeusz' z 1999 roku został pomyślnie dodany z polem avgRating.")
+        movieAfterUpdate = titleCollection.find_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999})
+        ic(movieAfterUpdate)
+    else:
+        titleCollection.update_one({'_id': movie['_id']}, {'$set': {'avgRating': 9.1}})
+        print("Pole avgRating zostało dodane/zaaktualizowane do filmu 'Pan Tadeusz' z 1999 roku.")
+
+
+
+
 # zad1()
 # zad2()
 # zad3()
@@ -108,4 +147,7 @@ def zad9():
 # zad5() # COS POPSUTE
 # zad6()
 # zad8("Blade Runner", 1982)
-zad9()
+# zad9()
+# zad10()
+# zad11()
+zad12()
