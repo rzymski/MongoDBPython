@@ -1,5 +1,5 @@
-from pymongo import MongoClient
 from icecream import ic
+from pymongo import MongoClient
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client['IMDB']
@@ -26,7 +26,6 @@ def zad2():
     zad2Query = {'startYear': 2020, 'genres': {'$regex': 'Romance', '$options': 'i'}, 'runtimeMinutes': {'$gt': 90, '$lte': 120}}
     zad2Display = {'_id': 0, 'primaryTitle': 1, 'startYear': 1, 'genres': 1, 'runtimeMinutes': 1}
     zad2Results = titleCollection.find(zad2Query, zad2Display).sort('primaryTitle', 1).limit(4)
-    # Wyświetlenie 4 dokumentow
     printDocList(zad2Results)
     zad2Count = titleCollection.count_documents(zad2Query)
     ic(zad2Count)
@@ -59,7 +58,7 @@ def zad4b():
 def zad5():
     # nameCollection.drop_index('primaryName_text')
     nameCollection.create_index([('primaryName', 'text')])
-    zad5Query = {'$text': {'$search': 'Fonda Coppola', '$caseSensitive': True}}
+    zad5Query = {'$text': {'$search': 'Fonda', '$caseSensitive': True}}
     zad5aResult = nameCollection.count_documents(zad5Query)
     ic(zad5aResult)
     zad5bResult = nameCollection.find(zad5Query, {'_id': 0, 'primaryName': 1, 'primaryProfession': 1}).limit(5)
@@ -73,6 +72,19 @@ def zad6():
         ic(index)
     indexCount = len(indexes)
     ic(indexCount)
+
+
+def zad7():
+    updatedMoviesIndexes = []
+    highestRatedMovies = ratingCollection.find({'averageRating': 10.0}, {'_id': 0, 'tconst': 1})
+    for movie in highestRatedMovies:
+        result = titleCollection.update_one({'tconst': movie['tconst']}, {'$set': {'max': 1}})
+        if result.modified_count > 0:
+            updatedMoviesIndexes.append(movie['tconst'])
+
+    ic(len(updatedMoviesIndexes))
+    updatedMovies = titleCollection.find({'tconst': {'$in': updatedMoviesIndexes[:10]}})
+    printDocList(updatedMovies)
 
 
 def zad8(title, year):
@@ -125,7 +137,7 @@ def zad11():
 
 
 def zad12():
-    # titleCollection.delete_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999})
+    titleCollection.delete_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999})
     movie = titleCollection.find_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999})
     if not movie:
         titleCollection.update_one({'primaryTitle': 'Pan Tadeusz', 'startYear': 1999}, {'$set': {'avgRating': 9.1}}, upsert=True)
@@ -141,16 +153,20 @@ def zad13():
     zad13Result = titleCollection.delete_many({'startYear': {'$lt': 1989}})
     ic(zad13Result.deleted_count)
 
-# zad1()
-# zad2()
-# zad3()
-# zad4a()
-# zad4b()  # DZIALA, ALE WYKONUJE SIĘ PONAD 3 H
-# zad5() # COS POPSUTE
-# zad6()
-# zad8("Blade Runner", 1982)
-# zad9()
-# zad10()
-# zad11()
-# zad12()
-# ##zad13()
+
+zad1()
+zad2()
+zad3()
+zad4a()
+zad4b()  # DZIALA, ALE WYKONUJE SIĘ PONAD 3H
+zad5()  # Wynik wyjątkowo dziwny, ale taki sam przy wykonaniu w MongoDB Shell.
+        # Fonda ma normalne wyniki, ale Coppola ma coś popsute dane
+zad6()
+zad7()  # DZIALA, ALE WYKONUJE SIĘ PONAD 3H
+zad8("Blade Runner", 1982)
+zad9()
+zad10()
+zad11()
+zad12()
+zad13()
+

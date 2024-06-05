@@ -1,0 +1,70 @@
+D:\programowanie\python\bazyDanych\mongoDB\venv\Scripts\python.exe D:\programowanie\python\bazyDanych\mongoDB\main.py 
+ic| titleCount: 8957802
+ic| ratingCount: 1441992
+ic| nameCount: 9396000
+{'primaryTitle': 419, 'startYear': 2020, 'runtimeMinutes': 111, 'genres': 'Drama,Romance,Thriller'}
+{'primaryTitle': '#s_uchilishcha', 'startYear': 2020, 'runtimeMinutes': 95, 'genres': 'Drama,Romance'}
+{'primaryTitle': '2 Hearts', 'startYear': 2020, 'runtimeMinutes': 101, 'genres': 'Drama,Romance'}
+{'primaryTitle': '23 Walks', 'startYear': 2020, 'runtimeMinutes': 102, 'genres': 'Comedy,Drama,Romance'}
+ic| zad2Count: 429
+{'count': 64631, 'titleType': 'tvEpisode'}
+{'count': 583, 'titleType': 'tvSpecial'}
+{'count': 110, 'titleType': 'tvShort'}
+{'count': 2201, 'titleType': 'tvMovie'}
+{'count': 326, 'titleType': 'tvMiniSeries'}
+{'count': 4546, 'titleType': 'movie'}
+{'count': 2605, 'titleType': 'tvSeries'}
+{'count': 4752, 'titleType': 'video'}
+{'count': 641, 'titleType': 'videoGame'}
+{'count': 4381, 'titleType': 'short'}
+ic| zad4aResult: 38642
+{'primaryTitle': 'Tripping on Hallucinogenic Frogs', 'startYear': 2012, 'averageRating': [10.0]}
+{'primaryTitle': 'Episode #8.62', 'startYear': 2010, 'averageRating': [10.0]}
+{'primaryTitle': 'Episode #9.22', 'startYear': 2010, 'averageRating': [10.0]}
+{'primaryTitle': 'Episode #9.21', 'startYear': 2010, 'averageRating': [10.0]}
+{'primaryTitle': 'Episode #9.18', 'startYear': 2010, 'averageRating': [10.0]}
+ic| index: SON([('v', 2), ('key', SON([('_id', 1)])), ('name', '_id_')])
+ic| index: SON([('v', 2), ('key', SON([('_fts', 'text'), ('_ftsx', 1)])), ('name', 'primaryName_text'), ('weights', SON([('primaryName', 1)])), ('default_language', 'english'), ('language_override', 'language'), ('textIndexVersion', 3)])
+ic| index: SON([('v', 2), ('key', SON([('birthYear', -1)])), ('name', 'birthYear_-1')])
+ic| indexCount: 3
+ic| zad8Result: {'averageRating': 8.1, 'primaryTitle': 'Blade Runner', 'startYear': 1982}
+Pole rating zostało pomyślnie dodane do dokumentu.
+ic| movieAfterUpdate: {'_id': ObjectId('665a5b8549b96058128ecb7b'),
+                       'endYear': '\\N',
+                       'genres': 'Action,Drama,Sci-Fi',
+                       'isAdult': 0,
+                       'originalTitle': 'Blade Runner',
+                       'primaryTitle': 'Blade Runner',
+                       'rating': [{'averageRating': 8.1, 'numVotes': 825268}],
+                       'runtimeMinutes': 117,
+                       'startYear': 1982,
+                       'tconst': 'tt0083658',
+                       'titleType': 'movie'}
+Nowy dokument został pomyślnie dodany do pola rating.
+ic| movieAfterUpdate: {'_id': ObjectId('665a5b8549b96058128ecb7b'),
+                       'endYear': '\\N',
+                       'genres': 'Action,Drama,Sci-Fi',
+                       'isAdult': 0,
+                       'originalTitle': 'Blade Runner',
+                       'primaryTitle': 'Blade Runner',
+                       'rating': [{'averageRating': 8.1, 'numVotes': 825268},
+                                  {'averageRating': 10, 'numVotes': 55555}],
+                       'runtimeMinutes': 117,
+                       'startYear': 1982,
+                       'tconst': 'tt0083658',
+                       'titleType': 'movie'}
+Pole rating zostało pomyślnie usunięte z dokumentu.
+ic| movieAfterUpdate: {'_id': ObjectId('665a5b8549b96058128ecb7b'),
+                       'endYear': '\\N',
+                       'genres': 'Action,Drama,Sci-Fi',
+                       'isAdult': 0,
+                       'originalTitle': 'Blade Runner',
+                       'primaryTitle': 'Blade Runner',
+                       'runtimeMinutes': 117,
+                       'startYear': 1982,
+                       'tconst': 'tt0083658',
+                       'titleType': 'movie'}
+Pole avgRating zostało dodane/zaaktualizowane do filmu 'Pan Tadeusz' z 1999 roku.
+ic| zad13Result.deleted_count: 1144203
+
+Process finished with exit code 0
